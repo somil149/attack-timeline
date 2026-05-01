@@ -2,6 +2,9 @@
 let selectedAttackId = null;
 let filteredAttacks = [];
 
+// Use enhanced dataset
+const attacksData = attacksDataEnhanced;
+
 // DOM elements
 const yearFilter = document.getElementById('year-filter');
 const industryFilter = document.getElementById('industry-filter');
@@ -17,6 +20,12 @@ const totalAttacksEl = document.getElementById('total-attacks');
 const industriesAffectedEl = document.getElementById('industries-affected');
 const peopleImpactedEl = document.getElementById('people-impacted');
 const financialLossEl = document.getElementById('financial-loss');
+
+// Navigation elements
+const navOverview = document.getElementById('nav-overview');
+const navTimeline = document.getElementById('nav-timeline');
+const navMitigation = document.getElementById('nav-mitigation');
+const navInsights = document.getElementById('nav-insights');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,6 +52,7 @@ function loadData() {
     });
     
     renderTimeline();
+    updateStats();
     
     // If an attack was selected but filtered out, clear selection
     if (selectedAttackId && !filteredAttacks.find(a => a.id === selectedAttackId)) {
