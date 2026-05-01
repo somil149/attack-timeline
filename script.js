@@ -262,6 +262,57 @@ function setupEventListeners() {
         loadData();
         updateStats();
     });
+    
+    // Navigation
+    if (navOverview) navOverview.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveNav('nav-overview');
+        showSection('overview');
+    });
+    
+    if (navTimeline) navTimeline.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveNav('nav-timeline');
+        showSection('timeline');
+    });
+    
+    if (navMitigation) navMitigation.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveNav('nav-mitigation');
+        showSection('mitigation');
+    });
+    
+    if (navInsights) navInsights.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveNav('nav-insights');
+        showSection('insights');
+    });
+}
+
+// Navigation functions
+function setActiveNav(navId) {
+    document.querySelectorAll('.nav-link').forEach(nav => {
+        nav.classList.remove('active');
+    });
+    const activeNav = document.getElementById(navId);
+    if (activeNav) activeNav.classList.add('active');
+}
+
+function showSection(section) {
+    // Hide all sections
+    document.querySelectorAll('.dashboard, .mitigation-section').forEach(el => {
+        el.style.display = 'none';
+    });
+    
+    // Show selected section
+    if (section === 'overview' || section === 'timeline') {
+        document.querySelector('.dashboard').style.display = 'flex';
+    } else if (section === 'mitigation') {
+        document.querySelector('.mitigation-section').style.display = 'block';
+    } else if (section === 'insights') {
+        // Insights are in sidebar, show dashboard
+        document.querySelector('.dashboard').style.display = 'flex';
+    }
 }
 
 // Helper functions
